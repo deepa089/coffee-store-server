@@ -35,6 +35,9 @@ async function run() {
     // await client.close();
   }
 }
+// run().catch(console.dir);
 
-// app.listen((res) =>{})
-run().catch(console.dir);
+
+app.listen(port, ()=> {
+  console.log("app listening running successfully")
+})
