@@ -3,7 +3,8 @@
  * MongoDB tutorial
  * https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/
  *
-_*
+_*  >> npm i dotenv
+ *  >> npm i mongodb
  * 
  * --------------------------
  * MongoDB Collection

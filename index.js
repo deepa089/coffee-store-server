@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 9001
-const { MongoClient, ServerApiVersion , ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 // middle ware
@@ -27,23 +27,25 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+    const myDB = client.db("CoffeeHouse");
+    const coffeeCollection = myDB.collection("Coffee_info");
     app.get('/coffees', async (req, res) => {
       console.log("Coffees Loading....")
-      // const cursor = userCollection.find();
-      // const result = await cursor.toArray();
-      // res.send(result);
+      const cursor = coffeeCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
     });
     app.post('/coffee', async (req, res) => {
       const newCoffee = req.body;
       console.log(newCoffee);
-      // const result = await coffeeCollection.insertOne(newCoffee);
-      // res.send(result);
-  })
+      const result = await coffeeCollection.insertOne(newCoffee);
+      res.send(result);
+    })
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    
+
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
@@ -54,6 +56,6 @@ app.get('/', (req, res) => {
   res.send('Coffee making server is running')
 })
 
-app.listen(port, ()=> {
+app.listen(port, () => {
   console.log("app listening running successfully")
 })
