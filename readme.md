@@ -1,3 +1,5 @@
+# run the server in node js 
+    node .\index.js
 ```
 /**
  * MongoDB tutorial
